@@ -1,22 +1,32 @@
 
 import Image from "next/image";
+import { Geist, Montserrat, DM_Sans, Outfit } from "next/font/google";
 
-export default function BoxMusic({ nombre}) {
+const montserrat = Outfit({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+export default function BoxMusic({ data, id }) {
 
     return (
 
-        <div className="min-w-30 flex flex-col items-center gap-2 p-4 border border-gray-700 rounded-lg">
-            <div className="overflow-hidden">
+        <div className="w-50 h-75 snap-start shrink-0 ">
+            <div className="relative w-full min-h-50">
                 <Image
-                    src='https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg'
-                    alt='Image-music'
-                    width={200}
-                    height={200}
-                    className="object-cover"
+                    src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
+                    alt='image music'
+                    fill // Hace que la imagen ocupe el 100% de su contenedor padre inmediato
+                    sizes="(max-width: 768px) 100vw, 33vw" // Optimiza la descarga según la pantalla
+                    className="object-cover rounded-xl"
+
                 />
             </div>
-            <div>
-                <h3>{nombre}</h3>
+
+            <div className={`w-50 mt-2 text-gray-500 ${montserrat.className} text-xl`}>
+                <span className="block whitespace-nowrap overflow-hidden text-ellipsis">{data?.title || 'Título no disponible'}</span>
+                <p className="whitespace-nowrap overflow-hidden text-ellipsis">{data?.author_name || 'Artista no disponible'}</p>
             </div>
         </div>
 

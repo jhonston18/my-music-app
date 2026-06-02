@@ -2,32 +2,33 @@
 
 
 
-import TimeLineMusic from '@/app/components/time-line-music'
-import SideBar from '@/app/components/sidebar'
 
-import { TextAlignJustify, Play, SkipBack, SkipForward, Heart, Repeat, Pause } from "lucide-react";
+import SideBar from '@/app/components/sidebar'
+import Reproductor from '@/app/components/reproductor'
+
+import { TextAlignJustify, Play, SkipBack, SkipForward, Heart, Repeat, Pause, ChevronDown } from "lucide-react";
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 
 const albumMusic = [
-    { 
-        id: 1, 
-        title: `Lana del rey - Salvatore (lyrics)`, 
-        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg', 
-        audio: '/music/audio1.mp3' 
+    {
+        id: 1,
+        title: `Lana del rey - Salvatore (lyrics)`,
+        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
+        audio: '/music/audio1.mp3'
     },
-    { 
-        id: 2, 
-        title: `Nothing's gonna hurt you baby - Cicarettes (lyrics)`, 
-        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg', 
-        audio: '/music/audio2.mp3' 
+    {
+        id: 2,
+        title: `Nothing's gonna hurt you baby - Cicarettes (lyrics)`,
+        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
+        audio: '/music/audio2.mp3'
     },
-    { 
-        id: 3, 
-        title: 'Sweet - Cigarettes (lyrics)', 
-        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg', 
-        audio: '/music/audio3.mp3' 
+    {
+        id: 3,
+        title: 'Sweet - Cigarettes (lyrics)',
+        image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
+        audio: '/music/audio3.mp3'
     }
 ]
 
@@ -122,24 +123,22 @@ export default function Dashboard() {
         audioRef.current.pause();
     };
 
+    const ID_VIDEO = "RYr96YYEaZY"
 
+    const EMBED_URL = `https://www.youtube-nocookie.com/embed/${ID_VIDEO}?&controls=0&disablekb=1&enablejsapi=1&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&autoplay=0&mute=0&start=0`;
 
-
-
+    console.log("esto es embed URL:", EMBED_URL);
 
     return (
-        <div className="bg-[url('https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg')] bg-cover bg-center ">
-            
-            <div 
-                className={`fixed inset-0 z-20 transition-opacity duration-300 ${isOpen ? 'opacity-100 bg-black/40 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-                onClick={() => setIsOpen(false)}
-            />
+        <div>
+
+
             <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
             <div className='min-h-screen backdrop-blur-2xl bg-black/20'>
                 <div className='relative'>
                     <div className='flex justify-between items-center px-4 py-3 text-white'>
                         <button className={`p-2 rounded-md size-8 cursor-pointer`} onClick={() => setIsOpen(true)}>
-                            <TextAlignJustify className="size-9 active:text-gray-500" />
+                            <ChevronDown className="size-9 active:text-gray-500"/>
                         </button>
                         <h2 className='text-xl font-medium'>My Music</h2>
                         <div className='w-10 h-10 rounded-full overflow-hidden relative'>
@@ -154,53 +153,18 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="text-white my-7">
-                        <div className='flex flex-col justify-center items-center h-96 p-3 '>
-                            <div className="w-79 h-79 relative rounded-3xl overflow-hidden shadow-2xl">
-                                <Image
-                                    src='https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg'
-                                    alt='Image-music'
-                                    fill
-                                    sizes="288px"
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
+                    <div className='w-full h-95'>
 
-                        <div className='flex flex-col gap-5 mx-6 my-6'>
-                            <div>
-                                <span className='block text-sm text-gray-300 uppercase tracking-wider font-bold'>Canal</span>
-                                <p className='text-xl font-semibold'>Lana del rey - Salvatore (lyrics)</p>
-                            </div>
+                        <iframe className="h-full w-full" src={EMBED_URL}>
+                        </iframe>
 
-                            <div className="my-2">
-                                {/* Le pasamos el porcentaje dinamico de actualizacion al componente */}
-                                <TimeLineMusic width={progressPercentage} onClick={handleBarClick} />
-                                <div className='w-full flex justify-between text-sm text-gray-300 mt-2'>
-                                    <span>{currentTimeFormatted}</span>
-                                    <span>{timeMusicFinish}</span>
-                                </div>
-                            </div>
-
-                            <div className='flex items-center justify-between mt-4'>
-                                <Heart className='size-7 cursor-pointer hover:scale-105 transition-transform' />
-                                <div className='flex justify-center items-center gap-8'>
-                                    <SkipBack className='size-7 cursor-pointer hover:scale-105 transition-transform' />
-                                    {handlerPlayer ? (
-                                        <div className="p-4 bg-white text-black rounded-full cursor-pointer hover:scale-105 transition-transform" onClick={PauseAudio}>
-                                            <Pause className='size-6 fill-black' />
-                                        </div>
-                                    ) : (
-                                        <div className="p-4 bg-white text-black rounded-full cursor-pointer hover:scale-105 transition-transform" onClick={playerAudio}>
-                                            <Play className='size-6 fill-black translate-x-0.5' />
-                                        </div>
-                                    )}
-                                    <SkipForward className='size-7 cursor-pointer hover:scale-105 transition-transform' />
-                                </div>
-                                <Repeat className='size-7 cursor-pointer hover:scale-105 transition-transform' />
-                            </div>
-                        </div>
                     </div>
+                    
+
+
+                    <Reproductor callbacks={{ playerAudio, PauseAudio, handlerPlayer, currentTimeFormatted, timeMusicFinish, progressPercentage, handleBarClick }} />
+
+
                 </div>
             </div>
         </div>

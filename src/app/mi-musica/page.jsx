@@ -4,98 +4,17 @@ import { Music, TextAlignJustify } from "lucide-react";
 
 
 import MiMusicaScroll from "../components/mi-musica-scroll";
+import {GET_DATA_MUSIC} from "@/app/api/data-content/dataContent";
 
 
 
 
-export default function MiMusica() {
+export default async function MiMusica() {
 
-    const albumMusic = {
-        regueton: {
-            title: 'Regueton',
-            musics: [
-                {
-                    id: 1,
-                    categorie: 'potcast mas escuchados',
-                    title: `Lana del rey - Salvatore (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio1.mp3'
-                },
-                {
-                    id: 2,
-                    categorie: 'salsa',
-                    title: `Nothing's gonna hurt you baby - Cicarettes (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio2.mp3'
-                },
-                {
-                    id: 3,
-                    categorie: 'regueton',
-                    title: 'Sweet - Cigarettes (lyrics)',
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio3.mp3'
-                }
-            ]
-        },
+    const data = await GET_DATA_MUSIC();
 
-        salsa: {
-            title: 'Salsa',
-            musics: [
-                {
-                    id: 1,
-                    categorie: 'potcast mas escuchados',
-                    title: `Lana del rey - Salvatore (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio1.mp3'
-                },
-                {
-                    id: 2,
-                    categorie: 'salsa',
-                    title: `Nothing's gonna hurt you baby - Cicarettes (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio2.mp3'
-                },
-                {
-                    id: 3,
-                    categorie: 'regueton',
-                    title: 'Sweet - Cigarettes (lyrics)',
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio3.mp3'
-                }
-            ]
-        },
+    console.log("Esta es la data en mimusica: ", data) 
 
-        lonuevo: {
-            title: 'Lo nuevo',
-            musics: [
-                {
-                    id: 1,
-                    categorie: 'potcast mas escuchados',
-                    title: `Lana del rey - Salvatore (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio1.mp3'
-                },
-                {
-                    id: 2,
-                    categorie: 'salsa',
-                    title: `Nothing's gonna hurt you baby - Cicarettes (lyrics)`,
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio2.mp3'
-                },
-                {
-                    id: 3,
-                    categorie: 'regueton',
-                    title: 'Sweet - Cigarettes (lyrics)',
-                    image: 'https://i1-e.pinimg.com/1200x/aa/53/8f/aa538fb499dc42e4727b63f19e32525c.jpg',
-                    audio: '/music/audio3.mp3'
-                }
-            ]
-        }
-
-
-    }
-
-    
     return (
         <div className="flex flex-col gap-4 p-5">
             <div className="text-2xl font-bold">
@@ -111,12 +30,11 @@ export default function MiMusica() {
                 <input className="p-2 w-full border border-gray-400 outline-none rounded-xl" type="text" placeholder="Ingresa el link de youtube de la musica que quieres escuchar" />
             </div>
 
-            <MiMusicaScroll album={'mi musica'} />
-            <MiMusicaScroll album={'mi musica'} />
-            <MiMusicaScroll album={'music.lonuevo'} />
+            <MiMusicaScroll data={data} id={'EdgkWykbvpw'} />
+            <MiMusicaScroll data={data} id={'RYr96YYEaZY'} />
+            <MiMusicaScroll data={data} id={'uJ_1HMAGb4k'} />
 
-           
-           
+
 
         </div>
     )

@@ -11,8 +11,8 @@ import BoxMusic from "./box-music";
 
 export default function MiMusicaScroll ({data, id} ) {
 
-  console.log("Esta es la data en mimusica scroll: ", data)
-  console.log("Este es el id en mimusica scroll: ", id)
+  // console.log("Esta es la data en mimusica scroll: ", data)
+  // console.log("Este es el id en mimusica scroll: ", id)
 
 
   return (

@@ -12,8 +12,8 @@ export default function BoxMusic({ data, id }) {
 
     return (
 
-        <div className="w-50 h-75 snap-start shrink-0 ">
-            <div className="relative w-full min-h-50">
+        <div className={`snap-start shrink-0`}> {/** min-w-50 min-h-75 para la pagina de mi-musica*/}
+            <div className="relative w-full min-h-50"> 
                 <Image
                     src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
                     alt='image music'
